@@ -82,6 +82,86 @@ public class ProductControllerTest {
     }
 
     @Test
+    public void putProduct() {
+
+        JSONObject requestParams = new JSONObject();
+        //requestParams.put("id", "200"); // Cast
+        requestParams.put("version", "0");
+        requestParams.put("productId", "138192983");
+        requestParams.put("name", "eBook");
+        requestParams.put("price", "12.99");
+
+        //@formatter:off
+        RestAssured.
+                given().//log().all().
+                contentType(ContentType.JSON).
+                accept(ContentType.JSON).
+                params(params).
+                header("Accept-Language", "pl").
+                body(requestParams.toString()).
+                //expect().log().all().
+                        when().
+                put("/product/put/2").
+                then().statusCode(HttpStatus.OK.value()).
+                log().all(true);
+        //@formatter:on
+
+        requestParams = new JSONObject();
+        //requestParams.put("id", "200"); // Cast
+        requestParams.put("version", "0");
+        requestParams.put("productId", "138192983");
+        requestParams.put("name", "Czekolada Wedel 95% Gorzka");
+        requestParams.put("price", "12.99");
+
+        //@formatter:off
+        RestAssured.
+                given().//log().all().
+                contentType(ContentType.JSON).
+                accept(ContentType.JSON).
+                params(params).
+                header("Accept-Language", "pl").
+                body(requestParams.toString()).
+                //expect().log().all().
+                        when().
+                put("/product/put/2").
+                then().statusCode(HttpStatus.OK.value()).
+                log().all(true);
+        //@formatter:on
+    }
+
+    @Test
+    public void deleteProduct() {
+
+        //@formatter:off
+        RestAssured.
+                given().//log().all().
+                contentType(ContentType.JSON).
+                accept(ContentType.JSON).
+                params(params).
+                header("Accept-Language", "pl").
+                //expect().log().all().
+                        when().
+                delete("/product/delete/1");
+                //then().statusCode(HttpStatus.OK.value()).
+                //log().all(true);
+        //@formatter:on
+
+        //@formatter:off
+        RestAssured.
+                given().//log().all().
+                contentType(ContentType.JSON).
+                accept(ContentType.JSON).
+                params(params).
+                header("Accept-Language", "pl").
+                //expect().log().all().
+                        when().
+                get("/product/get/1").
+                then().statusCode(HttpStatus.OK.value()).
+                log().all(true);
+        //@formatter:on
+    }
+
+    @Test
     public void edit() {
     }
 

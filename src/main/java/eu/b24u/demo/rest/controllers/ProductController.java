@@ -63,6 +63,25 @@ public class ProductController {
         return new ResponseEntity<>(productSaved, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "product/put", method = RequestMethod.PUT)
+    public ResponseEntity<?> putProduct(@RequestBody Product product) {
+        Product productSaved = productService.saveProduct(product);
+        return new ResponseEntity<>(productSaved, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "product/put/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> putIdProduct(@PathVariable Integer id, @RequestBody Product product) {
+        product.setId(id);
+        Product productSaved = productService.saveProduct(product);
+        return new ResponseEntity<>(productSaved, HttpStatus.OK);
+    }
+
+//    @RequestMapping(value = "product/delete", method = RequestMethod.DELETE)
+//    public ResponseEntity<?> deleteProduct(@PathVariable Integer id) {
+//        productService.deleteProduct(id);
+//        return new ResponseEntity<>(id, HttpStatus.OK);
+//    }
+
     // Afficher le formulaire de modification du Product
     @RequestMapping("product/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
